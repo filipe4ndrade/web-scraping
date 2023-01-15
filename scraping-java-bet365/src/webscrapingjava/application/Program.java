@@ -23,6 +23,7 @@ public class Program {
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.println(ANSI_YELLOW + "=====PLACAR DE FUTEBOL=====" + ANSI_RESET);
+				
 
 		Set<String> paulista = new HashSet<>();
 		Set<String> carioca = new HashSet<>();
@@ -115,8 +116,10 @@ public class Program {
 						if (campeonato.indexOf("carioca") >= 0) {
 							carioca.add(termo);
 						}
+						
+								
 						//Copa São Paulo
-						if (campeonato.indexOf("copa") >= 0) {
+						if (campeonato.indexOf("copa") >= 0 && campeonato.indexOf("da")<0) {
 							copaSp.add(termo);
 						}
 						//Paranaense
