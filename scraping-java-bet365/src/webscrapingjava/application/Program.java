@@ -61,50 +61,50 @@ public class Program {
 
 				if (!obj.getElementsByClass("badge badge-default").isEmpty()) {
 					String campeonato = url.getElementsByTag("a").get(count + 5).attr("href");
-					
-					System.out.println(campeonato);
-					if(campeonato.charAt(0)=='h') {
-						count+=2;
+
+					//System.out.println(campeonato);
+					if (campeonato.charAt(0) == 'h') {
+						count += 2;
 						campeonato = url.getElementsByTag("a").get(count + 5).attr("href");
 					}
-					if (campeonato.indexOf("/",2)<0) {
+					if (campeonato.indexOf("/", 2) < 0) {
 						count++;
 						campeonato = url.getElementsByTag("a").get(count + 5).attr("href");
 					}
-					
-					System.out.println(campeonato);
-						String status = obj.getElementsByClass("badge badge-danger status-name").text();
-						
+
+					//System.out.println(campeonato);
+					String status = obj.getElementsByClass("badge badge-danger status-name").text();
+
+					if (status.isEmpty()) {
+						status = obj.getElementsByClass("badge badge-success status-name blink").text();
+
 						if (status.isEmpty()) {
-							status = obj.getElementsByClass("badge badge-success status-name blink").text();
-							
-							if(status.isEmpty()) {
-								status = obj.getElementsByClass("badge badge-warning status-name").text();
-							}
+							status = obj.getElementsByClass("badge badge-warning status-name").text();
 						}
-						String time1 = obj.getElementsByClass("text-right team_link").text();
-						Element gols1 = obj.getElementsByClass("badge badge-default").first();
-						String time2 = obj.getElementsByClass("text-left team_link").text();
-						Element gols2 = obj.getElementsByClass("badge badge-default").get(1);
-
-						if (campeonato.charAt(0) == '/' && campeonato.indexOf("/", 2) > 0) {
-							campeonato = campeonato.substring(0, campeonato.indexOf("/", 2));
-						}
-						if (gols1 != null && gols2 != null) {
-
-							String gol1 = gols1.text();
-							String gol2 = gols2.text();
-							System.out.println(
-									ANSI_YELLOW + campeonato.replaceAll("/", "").replaceAll("-", " ") + ANSI_RESET);
-							System.out.println("        " + status+"\n"+time1 + "|" + gol1 + "|" + " X " + "|" + gol2 + "|" + time2);
-							System.out.println();
-
-							
-						}
-						count++;
 					}
+					String time1 = obj.getElementsByClass("text-right team_link").text();
+					Element gols1 = obj.getElementsByClass("badge badge-default").first();
+					String time2 = obj.getElementsByClass("text-left team_link").text();
+					Element gols2 = obj.getElementsByClass("badge badge-default").get(1);
+
+					// if (gols1 != null && gols2 != null) {
+
+					if (campeonato.charAt(0) == '/' && campeonato.indexOf("/", 2) > 0) {
+						campeonato = campeonato.substring(0, campeonato.indexOf("/", 2));
+					}
+
+					String gol1 = gols1.text();
+					String gol2 = gols2.text();
+					System.out.println(ANSI_YELLOW + campeonato.replaceAll("/", "").replaceAll("-", " ") + ANSI_RESET);
+					System.out.println(
+							"        " + status + "\n" + time1 + "|" + gol1 + "|" + " X " + "|" + gol2 + "|" + time2);
+					System.out.println();
+
+					// }
+
 				}
-			
+				count++;
+			}
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
