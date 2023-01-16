@@ -21,27 +21,23 @@ public class Program {
 	public static void main(String[] args) {
 
 		Scanner sc = new Scanner(System.in);
-		
+
 		System.out.println(ANSI_YELLOW + "=====PLACAR DE FUTEBOL=====" + ANSI_RESET);
-				
 
 		Set<String> paulista = new HashSet<>();
 		Set<String> carioca = new HashSet<>();
 		Set<String> copaSp = new HashSet<>();
 		Set<String> paranaense = new HashSet<>();
-		Set<String> mineiro = new HashSet<>();
-		Set<String> gaucho = new HashSet<>();
 		Set<String> baiano = new HashSet<>();
 		Set<String> catarinense = new HashSet<>();
 		Set<String> goiano = new HashSet<>();
-		Set<String> pernambucano = new HashSet<>();		
-		Set<String> alagoano = new HashSet<>();
+		Set<String> pernambucano = new HashSet<>();
 		Set<String> cearense = new HashSet<>();
-		Set<String> maranhense = new HashSet<>();
-		Set<String> potiguar = new HashSet<>();
-		Set<String> piauiense = new HashSet<>();
-		Set<String> sergipano = new HashSet<>();
+		Set<String> espanhol = new HashSet<>();
+		Set<String> frances = new HashSet<>();
+		Set<String> portugues = new HashSet<>();
 		Set<String> ingles = new HashSet<>();
+		Set<String> todos = new HashSet<>();
 
 		String continuar = "";
 		do {
@@ -85,21 +81,24 @@ public class Program {
 						String gols1 = obj.getElementsByClass("badge badge-default").first().text();
 						String time2 = obj.getElementsByClass("text-left team_link").text();
 						String gols2 = obj.getElementsByClass("badge badge-default").get(1).text();
-                            
-										
+
 						if (campeonato.charAt(0) == '/' && campeonato.indexOf("/", 2) > 0) {
 							campeonato = campeonato.substring(0, campeonato.indexOf("/", 2));
 						}
 
 						String termo = "        " + status + "\n" + time1 + "|" + gols1 + "|" + " X " + "|" + gols2
 								+ "|" + time2;
-						
-						if(!obj.getElementsByClass("badge badge-penalties").isEmpty()) {
-						       String penaltis1 = obj.getElementsByClass("badge badge-penalties").first().text();
-						       String penaltis2 = obj.getElementsByClass("badge badge-penalties").get(1).text();
-						       termo = "        " + status + "\n" + time1 + "|" + gols1 + "|" + " X " + "|" + gols2
-										+ "|" + time2 +"\n" + "Pênaltis:   |"+ penaltis1 + "|" + " X " + "|" + penaltis2+"|";
-						    }	
+
+						if (!obj.getElementsByClass("badge badge-penalties").isEmpty()) {
+							String penaltis1 = obj.getElementsByClass("badge badge-penalties").first().text();
+							String penaltis2 = obj.getElementsByClass("badge badge-penalties").get(1).text();
+							termo = "        " + status + "\n" + time1 + "|" + gols1 + "|" + " X " + "|" + gols2 + "|"
+									+ time2 + "\n" + "Pênaltis:   |" + penaltis1 + "|" + " X " + "|" + penaltis2 + "|";
+						}
+
+						String campeonatoFormatado = campeonato.replaceAll("/", "").replaceAll("-", " ");
+						todos.add(campeonatoFormatado+"\n"+termo);
+
 						/*
 						 * System.out.println( ANSI_YELLOW + campeonato.replaceAll("/",
 						 * "").replaceAll("-", " ") + ANSI_RESET); String termo = "        " + status +
@@ -116,41 +115,48 @@ public class Program {
 						if (campeonato.indexOf("carioca") >= 0) {
 							carioca.add(termo);
 						}
-						
-								
-						//Copa São Paulo
-						if (campeonato.indexOf("copa") >= 0 && campeonato.indexOf("da")<0) {
+
+						// Copa São Paulo
+						if (campeonato.indexOf("copa") >= 0 && campeonato.indexOf("da") < 0) {
 							copaSp.add(termo);
 						}
-						//Paranaense
+						// Paranaense
 						if (campeonato.indexOf("paranaense") >= 0) {
 							paranaense.add(termo);
 						}
-						//Baiano
+						// Baiano
 						if (campeonato.indexOf("baiano") >= 0) {
 							baiano.add(termo);
 						}
-						//Pernambucano
+						// Pernambucano
 						if (campeonato.indexOf("pernambucano") >= 0) {
 							pernambucano.add(termo);
 						}
-						//Catarinense
+						// Cearense
+						if (campeonato.indexOf("cearense") >= 0) {
+							cearense.add(termo);
+						}
+						// Catarinense
 						if (campeonato.indexOf("catarinense") >= 0) {
 							catarinense.add(termo);
 						}
-						//Goiano
+						// Goiano
 						if (campeonato.indexOf("goiano") >= 0) {
 							goiano.add(termo);
 						}
-						//Goiano
-						if (campeonato.indexOf("goiano") >= 0) {
-							goiano.add(termo);
+						// Espanhol
+						if (campeonato.indexOf("espanhol") >= 0) {
+							espanhol.add(termo);
 						}
-						//Goiano
-						if (campeonato.indexOf("goiano") >= 0) {
-							goiano.add(termo);
+						// Portugues
+						if (campeonato.indexOf("portugues") >= 0) {
+							portugues.add(termo);
 						}
-						//Ingles
+						// Francês
+						if (campeonato.indexOf("frances") >= 0) {
+							frances.add(termo);
+						}
+						// Ingles
 						if (campeonato.indexOf("ingles") >= 0) {
 							ingles.add(termo);
 						}
@@ -181,20 +187,35 @@ public class Program {
 					forEach(pernambucano);
 					break;
 				case 7:
-					forEach(catarinense);
+					forEach(cearense);
 					break;
 				case 8:
-					forEach(goiano);
+					forEach(catarinense);
 					break;
 				case 9:
+					forEach(goiano);
+					break;
+				case 10:
 					forEach(ingles);
 					break;
-					
+				case 11:
+					forEach(frances);
+					break;
+				case 12:
+					forEach(espanhol);
+					break;
+				case 13:
+					forEach(portugues);
+					break;
+				case 0:
+					forEach(todos);
+					break;
+
 				default:
 					break;
 
 				}
-				System.out.print(ANSI_YELLOW +"Clique enter para continuar ou x para sair: "+ANSI_RESET);
+				System.out.print(ANSI_YELLOW + "Clique enter para continuar ou x para sair: " + ANSI_RESET);
 				continuar = sc.nextLine();
 				System.out.println();
 
@@ -219,7 +240,6 @@ public class Program {
 		System.out.println("1- Placar de Hoje\n2- Placar de Ontem\n");
 		System.out.print(ANSI_YELLOW + "Digite 1 ou 2: " + ANSI_RESET);
 		int digito = sc.nextInt();
-	
 
 		switch (digito) {
 
@@ -242,10 +262,15 @@ public class Program {
 		System.out.println("4- Campeonato Paranaense ");
 		System.out.println("5- Campeonato Baiano ");
 		System.out.println("6- Campeonato Pernambucano ");
-		System.out.println("7- Campeonato Catarinense ");
-		System.out.println("8- Campeonato Goiano ");
-		System.out.println("9- Campeonato Inglês ");
-		
+		System.out.println("7- Campeonato Cearense ");
+		System.out.println("8- Campeonato Catarinense ");
+		System.out.println("9- Campeonato Goiano ");
+		System.out.println("10- Campeonato Inglês ");
+		System.out.println("11- Campeonato Francês ");
+		System.out.println("12- Campeonato Espanhol ");
+		System.out.println("13- Campeonato Português ");
+		System.out.println("0- Todos ");
+
 		System.out.println();
 		System.out.print(ANSI_YELLOW + "Digite sua opção: " + ANSI_RESET);
 		int selecao = sc.nextInt();
@@ -256,14 +281,14 @@ public class Program {
 	}
 
 	public static void forEach(Set<String> set) {
-		if(set.size()==0)
-		System.out.println(ANSI_RED+"Não Houve Jogos!\n"+ANSI_RED);
-		
+		if (set.size() == 0)
+			System.out.println(ANSI_RED + "Não Houve Jogos!\n" + ANSI_RED);
+
 		for (String obj : set) {
 			System.out.println(obj);
 			System.out.println();
 		}
-		
+
 	}
 
 }
