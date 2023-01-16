@@ -1,9 +1,8 @@
 package webscrapingjava.application;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
+import java.util.LinkedHashSet;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -18,29 +17,76 @@ public class Program {
 	public static final String ANSI_YELLOW = "\u001B[33m";
 	public static final String ANSI_RED = "\u001B[31m";
 
+	public static String menuInicialBusca() {
+		Scanner sc = new Scanner(System.in);
+
+		System.out.println(ANSI_YELLOW + "\nEscolha uma Opção:" + ANSI_RESET);
+		System.out.println("1- Placar de Hoje\n2- Placar de Ontem\n");
+		System.out.print(ANSI_YELLOW + "Digite 1 ou 2: " + ANSI_RESET);
+		int digito = sc.nextInt();
+
+		switch (digito) {
+
+		case 1:
+			return "jogos-de-hoje";
+		case 2:
+			return "jogos-de-ontem";
+		default:
+			return "";
+		}
+	}
+
+	public static int menuCampeonatos() {
+		Scanner sc = new Scanner(System.in);
+
+		System.out.println(ANSI_YELLOW + "Escolha um campeonato:" + ANSI_RESET);
+		System.out.println("1- Campeonato Paulista ");
+		System.out.println("2- Campeonato Carioca ");
+		System.out.println("3- Copa São Paulo ");
+		System.out.println("4- Campeonato Paranaense ");
+		System.out.println("5- Campeonato Baiano ");
+		System.out.println("6- Campeonato Pernambucano ");
+		System.out.println("7- Campeonato Cearense ");
+		System.out.println("8- Campeonato Catarinense ");
+		System.out.println("9- Campeonato Goiano ");
+		System.out.println("10- Campeonato Inglês ");
+		System.out.println("11- Campeonato Francês ");
+		System.out.println("12- Campeonato Espanhol ");
+		System.out.println("13- Campeonato Português ");
+		System.out.println("0- Todos ");
+
+		System.out.println();
+		System.out.print(ANSI_YELLOW + "Digite sua opção: " + ANSI_RESET);
+		int selecao = sc.nextInt();
+		System.out.println();
+
+		return selecao;
+
+	}
+
 	public static void main(String[] args) {
 
 		Scanner sc = new Scanner(System.in);
 
 		System.out.println(ANSI_YELLOW + "=====PLACAR DE FUTEBOL=====" + ANSI_RESET);
 
-		Set<String> paulista = new HashSet<>();
-		Set<String> carioca = new HashSet<>();
-		Set<String> copaSp = new HashSet<>();
-		Set<String> paranaense = new HashSet<>();
-		Set<String> baiano = new HashSet<>();
-		Set<String> catarinense = new HashSet<>();
-		Set<String> goiano = new HashSet<>();
-		Set<String> pernambucano = new HashSet<>();
-		Set<String> cearense = new HashSet<>();
-		Set<String> espanhol = new HashSet<>();
-		Set<String> frances = new HashSet<>();
-		Set<String> portugues = new HashSet<>();
-		Set<String> ingles = new HashSet<>();
-		Set<String> todos = new HashSet<>();
-
 		String continuar = "";
 		do {
+
+			Set<String> paulista = new HashSet<>();
+			Set<String> carioca = new HashSet<>();
+			Set<String> copaSp = new HashSet<>();
+			Set<String> paranaense = new HashSet<>();
+			Set<String> baiano = new HashSet<>();
+			Set<String> catarinense = new HashSet<>();
+			Set<String> goiano = new HashSet<>();
+			Set<String> pernambucano = new HashSet<>();
+			Set<String> cearense = new HashSet<>();
+			Set<String> espanhol = new HashSet<>();
+			Set<String> frances = new HashSet<>();
+			Set<String> portugues = new HashSet<>();
+			Set<String> ingles = new HashSet<>();
+			LinkedHashSet<String> todos = new LinkedHashSet<>();
 
 			String busca = menuInicialBusca();
 			try {
@@ -97,7 +143,7 @@ public class Program {
 						}
 
 						String campeonatoFormatado = campeonato.replaceAll("/", "").replaceAll("-", " ");
-						todos.add(campeonatoFormatado+"\n"+termo);
+						todos.add(campeonatoFormatado + "\n" + termo);
 
 						/*
 						 * System.out.println( ANSI_YELLOW + campeonato.replaceAll("/",
@@ -231,53 +277,6 @@ public class Program {
 
 		System.out.println(ANSI_YELLOW + "=====FIM DA APLICAÇÃO=====" + ANSI_RESET);
 		sc.close();
-	}
-
-	public static String menuInicialBusca() {
-		Scanner sc = new Scanner(System.in);
-
-		System.out.println(ANSI_YELLOW + "\nEscolha uma Opção:" + ANSI_RESET);
-		System.out.println("1- Placar de Hoje\n2- Placar de Ontem\n");
-		System.out.print(ANSI_YELLOW + "Digite 1 ou 2: " + ANSI_RESET);
-		int digito = sc.nextInt();
-
-		switch (digito) {
-
-		case 1:
-			return "jogos-de-hoje";
-		case 2:
-			return "jogos-de-ontem";
-		default:
-			return "";
-		}
-	}
-
-	public static int menuCampeonatos() {
-		Scanner sc = new Scanner(System.in);
-
-		System.out.println(ANSI_YELLOW + "Escolha um campeonato:" + ANSI_RESET);
-		System.out.println("1- Campeonato Paulista ");
-		System.out.println("2- Campeonato Carioca ");
-		System.out.println("3- Copa São Paulo ");
-		System.out.println("4- Campeonato Paranaense ");
-		System.out.println("5- Campeonato Baiano ");
-		System.out.println("6- Campeonato Pernambucano ");
-		System.out.println("7- Campeonato Cearense ");
-		System.out.println("8- Campeonato Catarinense ");
-		System.out.println("9- Campeonato Goiano ");
-		System.out.println("10- Campeonato Inglês ");
-		System.out.println("11- Campeonato Francês ");
-		System.out.println("12- Campeonato Espanhol ");
-		System.out.println("13- Campeonato Português ");
-		System.out.println("0- Todos ");
-
-		System.out.println();
-		System.out.print(ANSI_YELLOW + "Digite sua opção: " + ANSI_RESET);
-		int selecao = sc.nextInt();
-		System.out.println();
-
-		return selecao;
-
 	}
 
 	public static void forEach(Set<String> set) {
